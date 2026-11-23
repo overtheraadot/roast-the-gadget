@@ -13,8 +13,13 @@ ROAST = (
     "and 1 GB of food I already ate."
 )
 
+# The gate: /output/entry.txt must be UTF-8 text of 1 to 200 characters.
+MAX_CHARS = 200
+
 
 def main() -> int:
+    if not 1 <= len(ROAST) <= MAX_CHARS:
+        raise ValueError(f"roast is {len(ROAST)} chars, gate needs 1-{MAX_CHARS}")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
